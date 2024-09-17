@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chai aur Code</title>
+</head>
+<body style="background-color: black;color: white;text-align: center;font-size: xx-large;">
+    <ul class ="language">
+        <li>JavaScript</li>
+    </ul>   
+</body>
+<script>
+  const listItem=document.createElement('li')
+  const text=document.createTextNode("Python")
+  const exist=document.querySelector(".language")
+  listItem.appendChild(text)
+  exist.appendChild(listItem)
+// Using function to insertInto the List
+  function addListItem(langname){
+    const li=document.createElement('li')
+    li.appendChild(document.createTextNode(langname))
+    document.querySelector(".language").appendChild(li)
+  }
+
+  addListItem("Golang")
+  addListItem("C++")
+
+//Editing the Added ListItem
+const payload=document.querySelector("li:nth-child(2)")
+console.log(payload)
+payload.innerHTML="English"
+
+const payload2=document.querySelector("li:nth-child(3)")
+payload2.outerHTML="<li>Hindi</li>"
+
+const test=document.createElement("li")
+test.textContent="Punjabi"
+payload.replaceWith(test)
+
+//Removing an element
+  const rem=document.querySelector("li:nth-child(1)")
+  rem.remove()
+</script>
+</html>
