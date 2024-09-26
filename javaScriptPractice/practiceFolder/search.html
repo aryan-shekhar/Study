@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Search</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        #suggestions {
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid white;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: none; /* Hide suggestions initially */
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <input type="text" id="userInput" placeholder="Type to search...">
+        <button id="searchButton">Search</button>
+        <div id="suggestions"></div>
+    </div>
+
+    <script>
+        const array = ["aryan", "sumant", "varun", "anupam", "anirban", "noor", "abhijeet"];
+        const userInput = document.querySelector("#userInput");
+        const suggestionsDiv = document.querySelector("#suggestions");
+
+        function displaySearch() {
+            const inputValue = userInput.value.toLowerCase();
+            suggestionsDiv.innerHTML = ""; // Clear previous suggestions
+
+            if (inputValue) {
+                const filteredSuggestions = array.filter(item => item.includes(inputValue));
+                
+                if (filteredSuggestions.length > 0) {
+                    suggestionsDiv.style.display = "block"; // Show suggestions
+                    filteredSuggestions.forEach(item => {
+                        const suggestionItem = document.createElement("div");
+                        suggestionItem.textContent = item;
+                        suggestionItem.style.padding = "5px";
+                        suggestionItem.style.cursor = "pointer";
+                        suggestionItem.addEventListener("click", () => {
+                            userInput.value = item; // Set input to clicked suggestion
+                            suggestionsDiv.style.display = "none"; // Hide suggestions
+                        });
+                        suggestionsDiv.appendChild(suggestionItem);
+                    });
+                } else {
+                    suggestionsDiv.style.display = "none"; // Hide suggestions if none match
+                }
+            } else {
+                suggestionsDiv.style.display = "none"; // Hide suggestions if input is empty
+            }
+        }
+
+        userInput.addEventListener("input", displaySearch);
+    </script>
+</body>
+</html>
